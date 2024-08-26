@@ -1,10 +1,18 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CatsService } from './cats.service';
-import { CreateCatDto } from './dto/create-cat.dto';
-import { UpdateCatDto } from './dto/update-cat.dto';
-import { Cat } from './schemas/cat.schema';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from "@nestjs/common";
+import { CatsService } from "./cats.service";
+import { CreateCatDto } from "./dto/create-cat.dto";
+import { UpdateCatDto } from "./dto/update-cat.dto";
+import { Cat } from "./schemas/cat.schema";
 
-@Controller('cats')
+@Controller("cats")
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
@@ -18,18 +26,18 @@ export class CatsController {
     return this.catsService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Cat> {
+  @Get(":id")
+  async findOne(@Param("id") id: string): Promise<Cat> {
     return this.catsService.findOne(id);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
+  @Put(":id")
+  async update(@Param("id") id: string, @Body() updateCatDto: UpdateCatDto) {
     return this.catsService.update(id, updateCatDto);
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: string) {
+  @Delete(":id")
+  async delete(@Param("id") id: string) {
     return this.catsService.delete(id);
   }
 }

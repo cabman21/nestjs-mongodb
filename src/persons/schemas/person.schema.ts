@@ -33,8 +33,8 @@ export class Person {
   @Prop()
   createdAt: Date;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }] })
-  owners: Product[];
+  @Prop({ type: [{ type: Product, ref: "Product" }] })
+  products: Product[];
 }
 
 export const PersonSchema = SchemaFactory.createForClass(Person);

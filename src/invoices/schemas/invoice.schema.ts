@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Decimal128, HydratedDocument } from "mongoose";
+import { HydratedDocument } from "mongoose";
 
 export type InvoiceDocument = HydratedDocument<Invoice>;
 
@@ -24,7 +24,7 @@ export class Invoice {
   dueDate: Date;
 
   @Prop()
-  amount: Decimal128;
+  amount: number;
 
   @Prop()
   status: string;

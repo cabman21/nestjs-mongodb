@@ -4,6 +4,7 @@ import "dotenv/config";
 import { CatsModule } from "./cats/cats.module";
 import { InvoicesModule } from "./invoices/invoices.module";
 import { peopleModule } from "./people/people.module";
+import { categoriesModule } from "./categories/categories.module";
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { peopleModule } from "./people/people.module";
     CatsModule,
     InvoicesModule,
     peopleModule,
+    categoriesModule,
   ],
 })
 export class AppModule {}

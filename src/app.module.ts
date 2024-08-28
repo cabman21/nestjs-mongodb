@@ -3,14 +3,14 @@ import { MongooseModule } from "@nestjs/mongoose";
 import "dotenv/config";
 import { CatsModule } from "./cats/cats.module";
 import { InvoicesModule } from "./invoices/invoices.module";
-import { PersonsModule } from "./persons/persons.module";
+import { peopleModule } from "./people/people.module";
 
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.MONGODB_URL),
     CatsModule,
     InvoicesModule,
-    PersonsModule,
+    peopleModule,
   ],
 })
 export class AppModule {}

@@ -7,28 +7,28 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { PersonsService } from "./persons.service";
+import { PeopleService } from "./people.service";
 import { CreatePersonDto } from "./dto/create-person.dto";
 import { UpdatePersonDto } from "./dto/update-person.dto";
 import { Person } from "./schemas/person.schema";
 
-@Controller("persons")
-export class PersonsController {
-  constructor(private readonly personsService: PersonsService) {}
+@Controller("people")
+export class PeopleController {
+  constructor(private readonly peopleService: PeopleService) {}
 
   @Post()
   async create(@Body() createPersonDto: CreatePersonDto) {
-    await this.personsService.create(createPersonDto);
+    await this.peopleService.create(createPersonDto);
   }
 
   @Get()
   async findAll(): Promise<Person[]> {
-    return this.personsService.findAll();
+    return this.peopleService.findAll();
   }
 
   @Get(":id")
   async findOne(@Param("id") id: string): Promise<Person> {
-    return this.personsService.findOne(id);
+    return this.peopleService.findOne(id);
   }
 
   @Put(":id")
@@ -36,11 +36,11 @@ export class PersonsController {
     @Param("id") id: string,
     @Body() updatePersonDto: UpdatePersonDto
   ) {
-    return this.personsService.update(id, updatePersonDto);
+    return this.peopleService.update(id, updatePersonDto);
   }
 
   @Delete(":id")
   async delete(@Param("id") id: string) {
-    return this.personsService.delete(id);
+    return this.peopleService.delete(id);
   }
 }

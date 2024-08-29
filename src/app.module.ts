@@ -1,10 +1,11 @@
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import "dotenv/config";
 import { CatsModule } from "./cats/cats.module";
 import { InvoicesModule } from "./invoices/invoices.module";
 import { peopleModule } from "./people/people.module";
 import { categoriesModule } from "./categories/categories.module";
+import { AppLoggerMiddleware } from "./middleware/app.logger.middleware";
 
 @Module({
   imports: [
@@ -15,4 +16,8 @@ import { categoriesModule } from "./categories/categories.module";
     categoriesModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AppLoggerMiddleware).forRoutes("*");
+  }
+}

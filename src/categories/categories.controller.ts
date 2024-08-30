@@ -17,7 +17,8 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
-  async create(@Body() createCategoryDto: CreateCategoryDto) {
+  async create(@Body() body, @Body() createCategoryDto: CreateCategoryDto) {
+    console.debug('body =>', createCategoryDto);
     await this.categoriesService.create(createCategoryDto);
   }
 
@@ -28,6 +29,7 @@ export class CategoriesController {
 
   @Get(":id")
   async findOne(@Param("id") id: string): Promise<Category> {
+    console.debug('id =>', id);
     return this.categoriesService.findOne(id);
   }
 
@@ -36,11 +38,14 @@ export class CategoriesController {
     @Param("id") id: string,
     @Body() updateCategoryDto: UpdateCategoryDto
   ) {
+    console.debug('id =>', id);
+    console.debug('body =>', updateCategoryDto);
     return this.categoriesService.update(id, updateCategoryDto);
   }
 
   @Delete(":id")
   async delete(@Param("id") id: string) {
+    console.debug('id =>', id);
     return this.categoriesService.delete(id);
   }
 }

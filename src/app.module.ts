@@ -6,6 +6,7 @@ import { InvoicesModule } from "./invoices/invoices.module";
 import { peopleModule } from "./people/people.module";
 import { categoriesModule } from "./categories/categories.module";
 import { AppLoggerMiddleware } from "./middleware/app.logger.middleware";
+import mongoose from "mongoose";
 
 @Module({
   imports: [
@@ -18,6 +19,8 @@ import { AppLoggerMiddleware } from "./middleware/app.logger.middleware";
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
+    console.log(`mode ->` + process.env.MODE);
     consumer.apply(AppLoggerMiddleware).forRoutes("*");
+    mongoose.set("debug", true);
   }
 }

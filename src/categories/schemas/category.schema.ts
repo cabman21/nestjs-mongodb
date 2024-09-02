@@ -1,13 +1,17 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import { HydratedDocument, SchemaOptions, SchemaTypes, Types } from "mongoose";
 
 export type CategoryDocument = HydratedDocument<Category>;
 
-@Schema()
-export class Category {
-  @Prop()
-  id?: string;
+const options: SchemaOptions = {
+  collection: "categories",
+  id: true,
+  _id: true,
+  timestamps: false,
+};
 
+@Schema(options)
+export class Category {
   @Prop()
   name: string;
 
@@ -30,4 +34,11 @@ export class Category {
   products?: number;
 }
 
-export const CategorySchema = SchemaFactory.createForClass(Category);
+const _CategorySchema = SchemaFactory.createForClass(Category);
+
+_CategorySchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+_CategorySchema.set("toJSON", { virtuals: true });
+
+export const CategorySchema = _CategorySchema;
